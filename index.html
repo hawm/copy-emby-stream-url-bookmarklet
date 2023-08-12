@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Copy Emby Strem URL Bookmarklet</title>
+    <meta
+      name="description"
+      content="A Bookmarklet for copy Emby stream URL."
+    />
+    <link
+      id="bookmarklet"
+      as="fetch"
+      rel="preload"
+      href="./bookmarklet.js"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/terser/dist/bundle.min.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <h1>Copy Emby Strem URL Bookmarklet</h1>
+    <p>
+      A
+      <a href="https://en.wikipedia.org/wiki/Bookmarklet" target="_blank"
+        >Bookmarklet</a
+      >
+      for copy Emby stream URL.
+    </p>
+    <h2>Installation</h2>
+    <a id="installer">Please wait a seconds...</a>
+    <h2>Usage</h2>
+    <ol>
+      <li>Open a media item page in a Emby webpage</li>
+      <li>Click the bookmark which just created</li>
+      <li>Wait a few seconds, you will be notify</li>
+    </ol>
+    <a href="https://github.com/hawm/copy-emby-stream-url-bookmarklet"
+      >GitHub</a
+    >
+    <script>
+      const bookmarkletSrc = document.getElementById("bookmarklet").href;
+      const installer = document.getElementById("installer");
+      fetch(bookmarkletSrc)
+        .then((response) => response.text())
+        .then(async (bookmarklet) => {
+          const minBookmarklet = (
+            await Terser.minify(bookmarklet, {
+              compress: { negate_iife: false },
+            })
+          ).code;
+          installer.href = `javascript:${minBookmarklet}`;
+          installer.innerText = "Drag Me To Your Bookmark Bar";
+        })
+        .catch((e) => {
+          alert(`Something went wrong: \n${e}`);
+        });
+    </script>
+  </body>
+</html>
