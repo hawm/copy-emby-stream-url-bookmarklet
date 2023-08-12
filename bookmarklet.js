@@ -1,9 +1,10 @@
 javascript: (async function () {
   const URL_DATA_REGEX =
     /\/web\/index\.html\#!\/item\?id=(\d+)\&serverId=([0-9a-z]+)/;
-
-  /*   const SOURCE_SELECTOR =
+  const SOURCE_SELECTOR =
     "div[is='emby-scroller']:not(.hide) select.selectSource";
+
+  /*
   const SUBTITLE_SELECTOR =
     "div[is='emby-scroller']:not(.hide) select.selectSubtitles";
 
