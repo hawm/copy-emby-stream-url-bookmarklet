@@ -77,7 +77,8 @@ javascript: (async function () {
       subs_filename: subs_filename,
       subs_enable: subs_enable,
     };
-  } */
+  }
+  */
 
   async function getItemInfo(itemId) {
     let userId = ApiClient._serverInfo.UserId;
@@ -108,7 +109,8 @@ javascript: (async function () {
     }
     let mediaSource = itemInfo.MediaSources.find((m) => m.Id == mediaSourceId);
     let streamURLPrefix = `${ApiClient._serverAddress}/emby/videos/${itemInfo.Id}`;
-    /*     // subtitle
+    /*
+    // subtitle
     let subPath = getSubPath(mediaSource);
     let subURL =
       subPath.length > 0
@@ -117,17 +119,20 @@ javascript: (async function () {
     // intent
     let position = parseInt(itemInfo.UserData.PlaybackPositionTicks / 10000);
     let intent = await getIntent(mediaSource, position);
-    stream */
-    let streamURL = `${streamURL}/stream.${
+    stream
+    */
+    let streamURL = `${streamURLPrefix}/stream.${
       mediaSource.Container
     }?api_key=${ApiClient.accessToken()}&Static=true&MediaSourceId=${mediaSourceId}`;
 
-    console.log(streamURL, subURL, intent);
+    console.log(streamURL /* , subURL, intent */);
 
     return {
       streamURL,
+      /*
       subURL,
       intent,
+      */
     };
   }
 
